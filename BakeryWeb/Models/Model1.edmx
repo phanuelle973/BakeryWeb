@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="pmanuelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'pmanuel.dbo.Customers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="StateCode" />
+            <PropertyRef Name="ZipCode" />
+            <PropertyRef Name="PrimaryPhone" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="Active" />
+            <PropertyRef Name="CreateDate" />
+            <PropertyRef Name="CreateUser" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="MI" Type="varchar" MaxLength="1" />
+          <Property Name="Address" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Address2" Type="varchar" MaxLength="32" />
+          <Property Name="City" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="StateCode" Type="int" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="PrimaryPhone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AltPhone" Type="varchar" MaxLength="10" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IngredientCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CategoryCode" Type="int" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IngredientInventory">
+          <Key>
+            <PropertyRef Name="IngredientID" />
+          </Key>
+          <Property Name="IngredientID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemNumber" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="IngredientDescription" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="IngredientDescriptionAddl" Type="varchar" MaxLength="128" />
+          <Property Name="IngredientCategory" Type="int" />
+          <Property Name="StockCount" Type="int" Nullable="false" />
+          <Property Name="UOM" Type="int" Nullable="false" />
+          <Property Name="CostPerUnit" Type="decimal" Precision="9" Scale="3" />
+          <Property Name="Location" Type="int" />
+          <Property Name="ReorderLevel" Type="int" />
+          <Property Name="ReorderQty" Type="int" />
+          <Property Name="LastReorderDate" Type="datetime" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="128" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="LastUpdateUser" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="IngredientSupplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SupplierCode" Type="int" Nullable="false" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="SupplierURL" Type="varchar" MaxLength="256" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationShortName" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="LocationLongName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StateCode" Type="int" Nullable="false" />
+          <Property Name="StateAbbr" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="24" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="UOMCode" />
+          </Key>
+          <Property Name="UOMCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UOMShortName" Type="varchar" MaxLength="16" />
+          <Property Name="UOMLongName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <Function Name="bdbResetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="bdbResetSchema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="pmanuelModelStoreContainer">
+          <EntitySet Name="IngredientCategory" EntityType="Self.IngredientCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IngredientInventory" EntityType="Self.IngredientInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IngredientSupplier" EntityType="Self.IngredientSupplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customers].[CustomerID] AS [CustomerID], 
+    [Customers].[LastName] AS [LastName], 
+    [Customers].[FirstName] AS [FirstName], 
+    [Customers].[MI] AS [MI], 
+    [Customers].[Address] AS [Address], 
+    [Customers].[Address2] AS [Address2], 
+    [Customers].[City] AS [City], 
+    [Customers].[StateCode] AS [StateCode], 
+    [Customers].[ZipCode] AS [ZipCode], 
+    [Customers].[PrimaryPhone] AS [PrimaryPhone], 
+    [Customers].[AltPhone] AS [AltPhone], 
+    [Customers].[EmailAddress] AS [EmailAddress], 
+    [Customers].[Active] AS [Active], 
+    [Customers].[CreateDate] AS [CreateDate], 
+    [Customers].[CreateUser] AS [CreateUser]
+    FROM [dbo].[Customers] AS [Customers]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pmanuelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="IngredientCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Guid" Nullable="false" />
+          <Property Name="CategoryCode" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IngredientInventory">
+          <Key>
+            <PropertyRef Name="IngredientID" />
+          </Key>
+          <Property Name="IngredientID" Type="Guid" Nullable="false" />
+          <Property Name="ItemNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IngredientDescription" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IngredientDescriptionAddl" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="IngredientCategory" Type="Int32" />
+          <Property Name="StockCount" Type="Int32" Nullable="false" />
+          <Property Name="UOM" Type="Int32" Nullable="false" />
+          <Property Name="CostPerUnit" Type="Decimal" Precision="9" Scale="3" />
+          <Property Name="Location" Type="Int32" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="ReorderQty" Type="Int32" />
+          <Property Name="LastReorderDate" Type="DateTime" Precision="3" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="IngredientSupplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="Guid" Nullable="false" />
+          <Property Name="SupplierCode" Type="Int32" Nullable="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SupplierURL" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationShortName" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocationLongName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="Guid" Nullable="false" />
+          <Property Name="StateCode" Type="Int32" Nullable="false" />
+          <Property Name="StateAbbr" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="UOMCode" />
+          </Key>
+          <Property Name="UOMCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UOMShortName" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="UOMLongName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="StateCode" />
+            <PropertyRef Name="ZipCode" />
+            <PropertyRef Name="PrimaryPhone" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="Active" />
+            <PropertyRef Name="CreateDate" />
+            <PropertyRef Name="CreateUser" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MI" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address2" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StateCode" Type="Int32" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrimaryPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AltPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="pmanuelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="IngredientCategories" EntityType="Self.IngredientCategory" />
+          <EntitySet Name="IngredientInventories" EntityType="Self.IngredientInventory" />
+          <EntitySet Name="IngredientSuppliers" EntityType="Self.IngredientSupplier" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="UOMs" EntityType="Self.UOM" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <FunctionImport Name="bdbResetData" />
+          <FunctionImport Name="bdbResetSchema" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pmanuelModelStoreContainer" CdmEntityContainer="pmanuelEntities">
+          <EntitySetMapping Name="IngredientCategories">
+            <EntityTypeMapping TypeName="pmanuelModel.IngredientCategory">
+              <MappingFragment StoreEntitySet="IngredientCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IngredientInventories">
+            <EntityTypeMapping TypeName="pmanuelModel.IngredientInventory">
+              <MappingFragment StoreEntitySet="IngredientInventory">
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+                <ScalarProperty Name="IngredientDescription" ColumnName="IngredientDescription" />
+                <ScalarProperty Name="IngredientDescriptionAddl" ColumnName="IngredientDescriptionAddl" />
+                <ScalarProperty Name="IngredientCategory" ColumnName="IngredientCategory" />
+                <ScalarProperty Name="StockCount" ColumnName="StockCount" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="ReorderQty" ColumnName="ReorderQty" />
+                <ScalarProperty Name="LastReorderDate" ColumnName="LastReorderDate" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="LastUpdateUser" ColumnName="LastUpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IngredientSuppliers">
+            <EntityTypeMapping TypeName="pmanuelModel.IngredientSupplier">
+              <MappingFragment StoreEntitySet="IngredientSupplier">
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="SupplierURL" ColumnName="SupplierURL" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="pmanuelModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationShortName" ColumnName="LocationShortName" />
+                <ScalarProperty Name="LocationLongName" ColumnName="LocationLongName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="pmanuelModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UOMs">
+            <EntityTypeMapping TypeName="pmanuelModel.UOM">
+              <MappingFragment StoreEntitySet="UOM">
+                <ScalarProperty Name="UOMCode" ColumnName="UOMCode" />
+                <ScalarProperty Name="UOMShortName" ColumnName="UOMShortName" />
+                <ScalarProperty Name="UOMLongName" ColumnName="UOMLongName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="pmanuelModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MI" ColumnName="MI" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PrimaryPhone" ColumnName="PrimaryPhone" />
+                <ScalarProperty Name="AltPhone" ColumnName="AltPhone" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="bdbResetData" FunctionName="pmanuelModel.Store.bdbResetData" />
+          <FunctionImportMapping FunctionImportName="bdbResetSchema" FunctionName="pmanuelModel.Store.bdbResetSchema" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

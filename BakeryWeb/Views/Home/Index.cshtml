@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+<h2>Home</h2>
+
+<script>
+
+var config = {
+    Reset: {
+        url: '@Url.Action("AJAXReset", "Home")'
+    }
+};
+
+
+    function Reset(action) {
+        //alert(action)
+        let dataObj = JSON.stringify({
+            Action: action
+        });
+        $.ajax({
+            type: "POST",
+            url: config.Reset.url,
+            data: { "dataObj": dataObj },
+            cache: false,
+            success: function (response) {
+                if (response.Exception == "N") {
+                    $("#divMsg").html(`<label class='alert alert-danger' style='text-align: center; font-size: medium; font-weight: bold; color: white; background-color: #c41c46;'>${response.ApplicationMessage}</label>`);
+                }
+                else {
+                    $("#divMsg").html(`<label class='alert alert-danger' style='text-align: center; font-size: medium; font-weight: bold;  color: white; background-color: #c41c46;'>${response.ExceptionMessage}</label>`);
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#errorMsg").html(xhr.responseText);
+            }
+        });
+    }
+</script>
+
+<div>
+    <h2 style="padding-top: 50px;">Admin</h2>
+    <a href="#" onclick="Reset('RESETDATA'); return false;" style="font-size: x-large; color: #c41c46;">Reset Data</a>
+    <br />
+    <a href="#" onclick="Reset('RESETSCHEMA'); return false;" style="font-size: x-large; color: #c41c46; padding-bottom: 10px;">Reset Schema</a>
+</div>
+<div id="divMsg" style="margin-top: 10px;"></div>

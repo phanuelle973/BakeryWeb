@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pmanuelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'pmanuel.dbo.Customers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="City" />
+      <PropertyRef Name="StateCode" />
+      <PropertyRef Name="ZipCode" />
+      <PropertyRef Name="PrimaryPhone" />
+      <PropertyRef Name="EmailAddress" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreateUser" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="MI" Type="varchar" MaxLength="1" />
+    <Property Name="Address" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="Address2" Type="varchar" MaxLength="32" />
+    <Property Name="City" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="StateCode" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="PrimaryPhone" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="AltPhone" Type="varchar" MaxLength="10" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IngredientCategory">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CategoryCode" Type="int" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IngredientInventory">
+    <Key>
+      <PropertyRef Name="IngredientID" />
+    </Key>
+    <Property Name="IngredientID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ItemNumber" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="IngredientDescription" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="IngredientDescriptionAddl" Type="varchar" MaxLength="128" />
+    <Property Name="IngredientCategory" Type="int" />
+    <Property Name="StockCount" Type="int" Nullable="false" />
+    <Property Name="UOM" Type="int" Nullable="false" />
+    <Property Name="CostPerUnit" Type="decimal" Precision="9" Scale="3" />
+    <Property Name="Location" Type="int" />
+    <Property Name="ReorderLevel" Type="int" />
+    <Property Name="ReorderQty" Type="int" />
+    <Property Name="LastReorderDate" Type="datetime" />
+    <Property Name="SupplierID" Type="int" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="128" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" />
+    <Property Name="LastUpdateUser" Type="varchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="IngredientSupplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SupplierCode" Type="int" Nullable="false" />
+    <Property Name="SupplierName" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="SupplierURL" Type="varchar" MaxLength="256" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationShortName" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="LocationLongName" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StateCode" Type="int" Nullable="false" />
+    <Property Name="StateAbbr" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="StateName" Type="varchar" MaxLength="24" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UOM">
+    <Key>
+      <PropertyRef Name="UOMCode" />
+    </Key>
+    <Property Name="UOMCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UOMShortName" Type="varchar" MaxLength="16" />
+    <Property Name="UOMLongName" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <Function Name="bdbResetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="bdbResetSchema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="pmanuelModelStoreContainer">
+    <EntitySet Name="IngredientCategory" EntityType="Self.IngredientCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IngredientInventory" EntityType="Self.IngredientInventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IngredientSupplier" EntityType="Self.IngredientSupplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Customers].[CustomerID] AS [CustomerID], 
+    [Customers].[LastName] AS [LastName], 
+    [Customers].[FirstName] AS [FirstName], 
+    [Customers].[MI] AS [MI], 
+    [Customers].[Address] AS [Address], 
+    [Customers].[Address2] AS [Address2], 
+    [Customers].[City] AS [City], 
+    [Customers].[StateCode] AS [StateCode], 
+    [Customers].[ZipCode] AS [ZipCode], 
+    [Customers].[PrimaryPhone] AS [PrimaryPhone], 
+    [Customers].[AltPhone] AS [AltPhone], 
+    [Customers].[EmailAddress] AS [EmailAddress], 
+    [Customers].[Active] AS [Active], 
+    [Customers].[CreateDate] AS [CreateDate], 
+    [Customers].[CreateUser] AS [CreateUser]
+    FROM [dbo].[Customers] AS [Customers]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

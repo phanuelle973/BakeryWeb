@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<!-- BAKERY WEB PROJECT-->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/CSS/Bootstrap/bootstrap.min.css")" type="text/css" rel="stylesheet" />
+    <link href="@Url.Content("~/CSS/JQueryDateTimePicker/jquery.datetimepicker.css")" type="text/css" rel="stylesheet" />
+    <link href="@Url.Content("~/Fonts/bootstrap-icons.css")" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="@Url.Content("~/Scripts/JQuery/jquery-3.6.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/JQueryDateTimePicker/jquery.datetimepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Bootstrap/bootstrap.bundle.min.js")"></script>
+    <script>
+        function getURLParameterByName(name) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        function scrollToTop() {
+            document.documentElement.scrollTop = 0;
+            //$("html, body").animate({
+            //    scrollTop: 0
+            //}, "slow");
+        }
+        function scrollToBottom() {
+            document.documentElement.scrollTop = $(document).height();
+            //$("html, body").animate({
+            //    scrollTop: $(document).height()
+            //}, "slow");
+        }
+    </script>
+    <style>
+        .row_highlight tr:hover {
+            border: 2px solid yellow;
+            z-index: 10000;
+        }
+        /* Tooltip */
+        .tt + .tooltip > .tooltip-inner {
+            background-color: #cc7b9d;
+            color: #FFFFFF;
+            border: 1px solid black;
+            padding: 10px;
+            font-size: 15px;
+        }
+        /* Tooltip on top */
+        .tt + .tooltip.top > .tooltip-arrow {
+            border-top: 5px solid black;
+        }
+        /* Tooltip on bottom */
+        .tt + .tooltip.bottom > .tooltip-arrow {
+            border-bottom: 5px solid black;
+        }
+        /* Tooltip on left */
+        .tt + .tooltip.left > .tooltip-arrow {
+            border-left: 5px solid black;
+        }
+        /* Tooltip on right */
+        .tt + .tooltip.right > .tooltip-arrow {
+            border-right: 5px solid black;
+        }
+
+        .jumbotron {
+            background-image: url("../Images/bakery9.jpg");
+            background-size: cover;
+            margin-bottom: 0px;
+            min-height: 200px
+        }
+
+        .dropbtn {
+            background-color: black;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #c41c46;
+            min-width: 160px;
+            -moz-box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            -webkit-box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #cc7b9d;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #cc7b9d;
+        }
+    </style>
+</head>
+<body>
+    <div class="jumbotron container-fluid"></div>
+    <nav class="navbar fixed-top" style="background-color: #c41c46; position: relative">
+        <div class="container-fluid justify-content-start">
+            <a class="navbar-brand" href="~/Home" style="color:azure;"><span class="bi-list"></span>BDB Menu</a>
+            <div class="dropdown">
+                <button style="background-color: #c41c46;" class="dropbtn">@ViewBag.Title <span class="bi-caret-down-fill"></span></button>
+                <div class="dropdown-content">
+                    <a href="../Inventory" class="nav-item nav-link" style="color:azure;">Inventory</a>
+                    <a href="../Category" class="nav-item nav-link" style="color:azure;">Categories</a>
+                    <a href="../Suppliers" class="nav-item nav-link" style="color:azure;">Suppliers</a>
+                    <a href="../Customers" class="nav-item nav-link" style="color:azure;">Customers</a>
+                    <a href="../States" class="nav-item nav-link" style="color:azure;">States</a>
+                    <a href="../UOM" class="nav-item nav-link" style="color:azure;">UOM</a>
+                    <a href="../Locations" class="nav-item nav-link" style="color:azure;">Locations</a>
+                </div>
+            </div>
+            <a href="../Inventory" class="nav-item nav-link" style="color:azure;">Inventory</a>
+            <a href="../Category" class="nav-item nav-link" style="color:azure;">Categories</a>
+            <a href="../Suppliers" class="nav-item nav-link" style="color:azure;">Suppliers</a>
+            <a href="../Customers" class="nav-item nav-link" style="color:azure;">Customers</a>
+            <a href="../States" class="nav-item nav-link" style="color:azure;">States</a>
+            <a href="../UOM" class="nav-item nav-link" style="color:azure;">UOM</a>
+            <a href="../Locations" class="nav-item nav-link" style="color:azure;">Locations</a>
+        </div>
+    </nav>
+    <div>
+        <div>
+            <center>
+                <table style="text-align: center;">
+                    <tr><td style="font-size: 42px;">@ViewBag.Title</td></tr>
+                    <tr><td style="font-size: 36px;">@ViewBag.SubTitle</td></tr>
+                    <tr><td><label style="font-size: 12px">@ViewBag.LastUpdate</label></td></tr>
+                    <tr><td style="text-align: center" colspan="4"><label style="font-size:small; color: #c41c46">@ViewBag.UserName</label></td></tr>
+                </table>
+                <br />
+                @RenderBody()
+            </center>
+        </div>
+        <footer>
+            <br />
+            <p>&copy; Big D's Bakery, Inc. @System.DateTime.Now.ToString("yyyy")</p>
+        </footer>
+    </div>
+</body>
+</html>

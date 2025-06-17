@@ -1,0 +1,186 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@*<h2>Customers</h2>*@
+
+<script>
+
+
+    var config = {
+        GetData: {
+            url: '@Url.Action("AJAXGetData", "Customers")'
+        }
+    };
+
+
+    function GetData(action, sortOption) {
+        //alert(action)
+        let dataObj = JSON.stringify({
+            Action: action,
+            SortOption: sortOption,
+        });
+        $.ajax({
+            type: "POST",
+            url: config.GetData.url,
+            data: JSON.stringify(dataObj),
+            data: { "dataObj": dataObj },
+            cache: false,
+            success: function (response) {
+                if (response.Exception == "N") {
+                    $("#recordsReturned").html(`<h4 class='alert alert-primary' style='text-align: center; font-size: medium; font-weight: bold; width: 90%; border: 1px solid black; border-color: #000000; background-color: #cc7b9d; color: #ffffff;'>` +
+                        `${response.RecordCount} Items - Current as of: ${response.DisplayTime}</h4>`);
+                    if (response.RecordCount > 0) {
+                        showData(response);
+                        $("#content").show();
+                    }
+                    else {
+                        $("#divMsg").html(`<label class='alert alert-danger' style='text-align: center; font-size: medium; font-weight: bold'>${response.ApplicationMessage}</label>`);
+                        $("#content").hide();
+                    }
+                }
+                else {
+                    $("#divMsg").html(`<label class='alert alert-danger' style='text-align: center; font-size: medium; font-weight: bold'>${response.ExceptionMessage}</label>`);
+                    $("#content").hide();
+                }
+            },
+        });
+    }
+    $(document).ready(function () {
+        GetData("GET", "1");
+    });
+
+    function showData(response) {
+        let spanNoIcon = '</th>';
+        let spanIcon = `<span class="${response.SortIcon}"></span></th>`;
+        let font = "font-size: 16px; color: #ffffff;";
+        let rowColor = "#c41c46";
+        let html = "";
+        html += `<tr style="background-color: ${rowColor};">`;
+        //html += `<th style="" field="CustomerID"></th>`;   // display CustomerID
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="CustomerID" onclick="sortByField(this); return false;"><a>Customer ID</a>`;
+        html += response.SortColumn == "CustomerID" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="LastName" onclick="sortByField(this); return false;"><a>Last Name</a>`;
+        html += response.SortColumn == "LastName" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="FirstName" onclick="sortByField(this); return false;"><a>First Name</a>`;
+        html += response.SortColumn == "FirstName" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="MI" onclick="sortByField(this); return false;"><a>Middle Initial</a>`;
+        html += response.SortColumn == "MI" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="Address" onclick="sortByField(this); return false;"><a>Address</a>`;
+        html += response.SortColumn == "Address" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="Address2" onclick="sortByField(this); return false;"><a>Address2</a>`;
+        html += response.SortColumn == "Address2" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="City" onclick="sortByField(this); return false;"><a>City</a>`;
+        html += response.SortColumn == "City" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="StateCode" onclick="sortByField(this); return false;"><a>State Abbr</a>`;
+        html += response.SortColumn == "StateCode" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="ZipCode" onclick="sortByField(this); return false;"><a>Zip Code</a>`;
+        html += response.SortColumn == "ZipCode" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="PrimaryPhone" onclick="sortByField(this); return false;"><a>Primary Phone</a>`;
+        html += response.SortColumn == "PrimaryPhone" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="Active" onclick="sortByField(this); return false;"><a>Active</a>`;
+        html += response.SortColumn == "Active" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="CreateUser" onclick="sortByField(this); return false;"><a>Create User</a>`;
+        html += response.SortColumn == "CreateUser" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="CreateDate" onclick="sortByField(this); return false;"><a>Create Date</a>`;
+        html += response.SortColumn == "CreateDate" ? spanIcon : spanNoIcon;
+        html += `</tr>`;
+        $("#tblData thead").html(html);
+        html = ``;
+        for (i = 0; i < response.RecordCount; ++i) {
+            rowColor = rowColor == "#cc7b9d" ? "#c41c46" : "#cc7b9d";
+            html += `<tr style="background-color: ${rowColor};">`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].CustomerID}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].LastName}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].FirstName}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].MI ?? ''}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].Address}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].Address2 ?? ''}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].City}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].StateCode}</td>`;
+            let zip = response.DisplayViewList[i].ZipCode;
+            let formattedZip = '';
+            if (zip) {
+                if (zip.length === 9) {
+                    formattedZip = `${zip.substring(0, 5)}-${zip.substring(5)}`;
+                } else {
+                    formattedZip = zip;
+                }
+            }
+
+            let phone = response.DisplayViewList[i].PrimaryPhone;
+            let formattedPhone = phone && phone.length === 10
+                ? `${phone.substring(0, 3)}-${phone.substring(3, 6)}-${phone.substring(6)}`
+                : phone ?? '';
+
+            html += `<td style="text-align: center; ${font}">${formattedZip}</td>`;
+            html += `<td style="text-align: center; ${font}">${formattedPhone}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].Active}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].CreateUser}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].CreateDate}</td>`;
+            html += `</tr>`;
+        }
+        $("#tblData tbody").html(html);
+    }
+    function sortByField(obj) {
+        let columnName = $(obj).attr("field");
+        let sortA = $(obj).find("span").hasClass("bi-caret-up-fill");
+        let sortOption = "";;
+        switch (columnName) {
+            case "CustomerID":
+                sortOption = sortA ? "2" : "1";
+                break;
+            case "LastName":
+                sortOption = sortA ? "4" : "3";
+                break;
+            case "FirstName":
+                sortOption = sortA ? "6" : "5";
+                break;
+            case "MI":
+                sortOption = sortA ? "8" : "7";
+                break;
+            case "Address":
+                sortOption = sortA ? "10" : "9";
+                break;
+            case "Address2":
+                sortOption = sortA ? "12" : "11";
+                break;
+            case "City":
+                sortOption = sortA ? "14" : "13";
+                break;
+            case "StateCode":
+                sortOption = sortA ? "16" : "15";
+                break;
+            case "ZipCode":
+                sortOption = sortA ? "18" : "17";
+                break;
+            case "PrimaryPhone":
+                sortOption = sortA ? "20" : "19";
+                break;
+            case "Active":
+                sortOption = sortA ? "22" : "21";
+                break;
+            case "CreateUser":
+                sortOption = sortA ? "24" : "23";
+                break;
+            case "CreateDate":
+                sortOption = sortA ? "26" : "25";
+                break;
+        }
+        GetData("GET", sortOption)
+    }
+
+</script>
+
+<div id="content">
+    <button onclick="scrollToTop()" id="btnToTop" class="btn btn-primary" title="Go to top" style="width: 50px; position: fixed; bottom: 60px; right: 25px; z-index: 99; background-color: #cc7b9d; border-color: #000000;"><span class="bi-arrow-up"></span></button>
+    <button onclick="scrollToBottom()" id="btnToBottom" class="btn btn-primary" title="Go to bottom" style="width: 50px; position: fixed; bottom: 20px; right: 25px; z-index: 99; background-color: #cc7b9d; border-color: #000000;"><span class="bi-arrow-down"></span></button>
+    <div id="recordsReturned"></div>
+    <table id="tblData" class="table" style="table-layout: fixed; border: 1px solid black; border-color: #000000; width: 90%;">
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div id="divMsg"></div>

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pmanuelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="IngredientCategory">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Guid" Nullable="false" />
+    <Property Name="CategoryCode" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IngredientInventory">
+    <Key>
+      <PropertyRef Name="IngredientID" />
+    </Key>
+    <Property Name="IngredientID" Type="Guid" Nullable="false" />
+    <Property Name="ItemNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IngredientDescription" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IngredientDescriptionAddl" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="IngredientCategory" Type="Int32" />
+    <Property Name="StockCount" Type="Int32" Nullable="false" />
+    <Property Name="UOM" Type="Int32" Nullable="false" />
+    <Property Name="CostPerUnit" Type="Decimal" Precision="9" Scale="3" />
+    <Property Name="Location" Type="Int32" />
+    <Property Name="ReorderLevel" Type="Int32" />
+    <Property Name="ReorderQty" Type="Int32" />
+    <Property Name="LastReorderDate" Type="DateTime" Precision="3" />
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <Property Name="LastUpdateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="IngredientSupplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="Guid" Nullable="false" />
+    <Property Name="SupplierCode" Type="Int32" Nullable="false" />
+    <Property Name="SupplierName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SupplierURL" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocationShortName" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LocationLongName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="Guid" Nullable="false" />
+    <Property Name="StateCode" Type="Int32" Nullable="false" />
+    <Property Name="StateAbbr" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StateName" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UOM">
+    <Key>
+      <PropertyRef Name="UOMCode" />
+    </Key>
+    <Property Name="UOMCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UOMShortName" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="UOMLongName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="City" />
+      <PropertyRef Name="StateCode" />
+      <PropertyRef Name="ZipCode" />
+      <PropertyRef Name="PrimaryPhone" />
+      <PropertyRef Name="EmailAddress" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreateUser" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MI" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address2" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StateCode" Type="Int32" Nullable="false" />
+    <Property Name="ZipCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrimaryPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AltPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUser" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="pmanuelEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="IngredientCategories" EntityType="Self.IngredientCategory" />
+    <EntitySet Name="IngredientInventories" EntityType="Self.IngredientInventory" />
+    <EntitySet Name="IngredientSuppliers" EntityType="Self.IngredientSupplier" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="UOMs" EntityType="Self.UOM" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <FunctionImport Name="bdbResetData" />
+    <FunctionImport Name="bdbResetSchema" />
+  </EntityContainer>
+</Schema>

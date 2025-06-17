@@ -1,0 +1,136 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@*<h2>Category</h2>*@
+
+<script>
+
+
+    var config = {
+        GetData: {
+            url: '@Url.Action("AJAXGetData", "Category")'
+        }
+    };
+
+
+    function GetData(action, sortOption) {
+        //alert(action)
+        let dataObj = JSON.stringify({
+            Action: action,
+            SortOption: sortOption,
+        });
+        $.ajax({
+            type: "POST",
+            url: config.GetData.url,
+            data: JSON.stringify(dataObj),
+            data: { "dataObj": dataObj },
+            cache: false,
+            success: function (response) {
+                if (response.Exception == "N") {
+                    $("#recordsReturned").html(`<h4 class='alert alert-primary' style='text-align: center; font-size: medium; font-weight: bold; width: 90%; border: 1px solid black; border-color: #000000; background-color: #cc7b9d; color: #ffffff;'>` +
+                        `${response.RecordCount} Items - Current as of: ${response.DisplayTime}</h4>`);
+                    if (response.RecordCount > 0) {
+                        showData(response);
+                        $("#content").show();
+                    }
+                    else {
+                        $("#divMsg").html(`<label class='alert alert-danger' style='text-align: center; font-size: medium; font-weight: bold'>${response.ApplicationMessage}</label>`);
+                        $("#content").hide();
+                    }
+                }
+                else {
+                    $("#divMsg").html(`<label class='alert alert-danger' style='text-align: center; font-size: medium; font-weight: bold'>${response.ExceptionMessage}</label>`);
+                    $("#content").hide();
+                }
+            },
+        });
+    }
+    $(document).ready(function () {
+        GetData("GET", "1");
+    });
+
+    function showData(response) {
+        let spanNoIcon = '</th>';
+        let spanIcon = `<span class="${response.SortIcon}"></span></th>`;
+        let font = "font-size: 16px; color: #ffffff;";
+        let rowColor = "#c41c46";
+        let html = "";
+        html += `<tr style="background-color: ${rowColor};">`;
+        html += `<th style="display: none;" field="CategoryID"></th>`;   // don't display CategoryID
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="CategoryCode" onclick="sortByField(this); return false;"><a>Category Code</a>`;
+        html += response.SortColumn == "CategoryCode" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="CategoryName" onclick="sortByField(this); return false;"><a>Category Name</a>`;
+        html += response.SortColumn == "CategoryName" ? spanIcon : spanNoIcon;
+        //html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="CategoryURL" onclick="sortByField(this); return false;"><a>Category URL</a>`;
+        //html += response.SortColumn == "CategoryURL" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="Active" onclick="sortByField(this); return false;"><a>Active</a>`;
+        html += response.SortColumn == "Active" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="Deleted" onclick="sortByField(this); return false;"><a>Deleted</a>`;
+        html += response.SortColumn == "Deleted" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="CreateUser" onclick="sortByField(this); return false;"><a>Create User</a>`;
+        html += response.SortColumn == "CreateUser" ? spanIcon : spanNoIcon;
+        html += `<th style="text-align: center; width: 10px; font-size: 12px; color: #ffffff" field="CreateDate" onclick="sortByField(this); return false;"><a>Create Date</a>`;
+        html += response.SortColumn == "CreateDate" ? spanIcon : spanNoIcon;
+        html += `</tr>`;
+        $("#tblData thead").html(html);
+        html = ``;
+        for (i = 0; i < response.RecordCount; ++i) {
+            rowColor = rowColor == "#cc7b9d" ? "#c41c46" : "#cc7b9d";
+            html += `<tr style="background-color: ${rowColor};">`;
+            html += `<td style="display: none; ${font}">${response.DisplayViewList[i].CategoryID}</td>`;  // don't display this
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].CategoryCode}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].CategoryName}</td>`;
+            //html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].CategoryURL}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].Active}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].Deleted}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].CreateUser}</td>`;
+            html += `<td style="text-align: center; ${font}">${response.DisplayViewList[i].CreateDate}</td>`;
+            html += `</tr>`;
+        }
+        $("#tblData tbody").html(html);
+    }
+    function sortByField(obj) {
+        let columnName = $(obj).attr("field");
+        let sortA = $(obj).find("span").hasClass("bi-caret-up-fill");
+        let sortOption = "";;
+        switch (columnName) {
+            case "CategoryCode":
+                sortOption = sortA ? "2" : "1";
+                break;
+            case "CategoryName":
+                sortOption = sortA ? "4" : "3";
+                break;
+            //case "CategoryURL":
+            //    sortOption = sortA ? "6" : "5";
+            //    break;
+            case "Active":
+                sortOption = sortA ? "6" : "5";
+                break;
+            case "Deleted":
+                sortOption = sortA ? "8" : "7";
+                break;
+            case "CreateUser":
+                sortOption = sortA ? "10" : "9";
+                break;
+            case "CreateDate":
+                sortOption = sortA ? "12" : "11";
+                break;
+        }
+        GetData("GET", sortOption)
+    }
+
+</script>
+
+<div id="content">
+    <button onclick="scrollToTop()" id="btnToTop" class="btn btn-primary" title="Go to top" style="width: 50px; position: fixed; bottom: 60px; right: 25px; z-index: 99; background-color: #cc7b9d; border-color: #000000;"><span class="bi-arrow-up"></span></button>
+    <button onclick="scrollToBottom()" id="btnToBottom" class="btn btn-primary" title="Go to bottom" style="width: 50px; position: fixed; bottom: 20px; right: 25px; z-index: 99; background-color: #cc7b9d; border-color: #000000;"><span class="bi-arrow-down"></span></button>
+    <div id="recordsReturned"></div>
+    <table id="tblData" class="table" style="table-layout: fixed; border: 1px solid black; border-color: #000000; width: 90%;">
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div id="divMsg"></div>

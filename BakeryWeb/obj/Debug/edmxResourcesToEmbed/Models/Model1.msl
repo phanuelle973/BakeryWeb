@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="pmanuelModelStoreContainer" CdmEntityContainer="pmanuelEntities">
+    <EntitySetMapping Name="IngredientCategories">
+      <EntityTypeMapping TypeName="pmanuelModel.IngredientCategory">
+        <MappingFragment StoreEntitySet="IngredientCategory">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IngredientInventories">
+      <EntityTypeMapping TypeName="pmanuelModel.IngredientInventory">
+        <MappingFragment StoreEntitySet="IngredientInventory">
+          <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+          <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+          <ScalarProperty Name="IngredientDescription" ColumnName="IngredientDescription" />
+          <ScalarProperty Name="IngredientDescriptionAddl" ColumnName="IngredientDescriptionAddl" />
+          <ScalarProperty Name="IngredientCategory" ColumnName="IngredientCategory" />
+          <ScalarProperty Name="StockCount" ColumnName="StockCount" />
+          <ScalarProperty Name="UOM" ColumnName="UOM" />
+          <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+          <ScalarProperty Name="ReorderQty" ColumnName="ReorderQty" />
+          <ScalarProperty Name="LastReorderDate" ColumnName="LastReorderDate" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="LastUpdateUser" ColumnName="LastUpdateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IngredientSuppliers">
+      <EntityTypeMapping TypeName="pmanuelModel.IngredientSupplier">
+        <MappingFragment StoreEntitySet="IngredientSupplier">
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="SupplierURL" ColumnName="SupplierURL" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="pmanuelModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="LocationShortName" ColumnName="LocationShortName" />
+          <ScalarProperty Name="LocationLongName" ColumnName="LocationLongName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="pmanuelModel.State">
+        <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+          <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UOMs">
+      <EntityTypeMapping TypeName="pmanuelModel.UOM">
+        <MappingFragment StoreEntitySet="UOM">
+          <ScalarProperty Name="UOMCode" ColumnName="UOMCode" />
+          <ScalarProperty Name="UOMShortName" ColumnName="UOMShortName" />
+          <ScalarProperty Name="UOMLongName" ColumnName="UOMLongName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="pmanuelModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MI" ColumnName="MI" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="PrimaryPhone" ColumnName="PrimaryPhone" />
+          <ScalarProperty Name="AltPhone" ColumnName="AltPhone" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="bdbResetData" FunctionName="pmanuelModel.Store.bdbResetData" />
+    <FunctionImportMapping FunctionImportName="bdbResetSchema" FunctionName="pmanuelModel.Store.bdbResetSchema" />
+  </EntityContainerMapping>
+</Mapping>
